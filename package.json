@@ -2,7 +2,7 @@
   "name": "vue-thin-modal",
   "version": "0.0.0",
   "author": "katashin",
-  "description": "Thin modal Vue component",
+  "description": "Thin but powerful modal component of Vue.js",
   "keywords": [
     "modal",
     "component",

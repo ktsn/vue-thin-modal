@@ -1,6 +1,6 @@
-# Vue Modal
+# vue-thin-modal
 
-Thin modal Vue component.
+vue-thin-modal provides thin but powerful modal component. Its styles, transitions and contents are fully customizable.
 
 ## Installation
 
