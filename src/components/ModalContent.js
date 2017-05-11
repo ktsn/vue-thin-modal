@@ -26,7 +26,13 @@ export default {
     )
 
     return (
-      h('div', { staticClass: 'modal-content-wrapper' }, [
+      h('div', {
+        staticClass: 'modal-content-wrapper',
+        attrs: {
+          role: 'dialog',
+          'aria-hidden': String(!show)
+        }
+      }, [
         h('transition', transitionData, [
           show && child
         ])
