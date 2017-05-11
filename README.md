@@ -71,6 +71,10 @@ $ yarn add vue-thin-modal
 
   Required as the modal name. The `name` must be unique against every modal you would use.
 
+* `disable-backdrop` - Boolean
+
+  If `true`, The modal will not be closed by clicking backdrop.
+
 * `content-transition` - Object
 
   It is the same options as the props of Vue's `<transition>` component. You can customize the modal content transition by using this prop. If omitted a default transition will be used.
