@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const fs = require('fs')
 const rollup = require('rollup').rollup
 const babel = require('rollup-plugin-babel')

@@ -29,7 +29,7 @@
     "dev:example": "webpack-dev-server --inline --hot --config examples/webpack.config.js",
     "play": "vbuild dev --config play.config.js",
     "flow": "flow check",
-    "lint": "eslint --fix \"@(src|scripts)/**/*.js\"",
+    "lint": "eslint --fix \"@(src|scripts|play)/**/*.js\"",
     "release": "run-s lint flow clean build"
   },
   "devDependencies": {
