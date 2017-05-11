@@ -15,6 +15,7 @@ export function generateModal (Vue: any, mediator: Mediator) {
         type: String,
         required: true
       },
+      disableBackdrop: Boolean,
       backdropTransition: {
         type: Object,
         default () {
@@ -37,7 +38,9 @@ export function generateModal (Vue: any, mediator: Mediator) {
 
     beforeCreate () {
       if (!portal) {
-        portal = new Vue(ModalPortal).$mount()
+        portal = new Vue(ModalPortal)
+          .$mount()
+          .$on('close', () => mediator.pop())
       }
     },
 
@@ -53,7 +56,8 @@ export function generateModal (Vue: any, mediator: Mediator) {
       portal.update(this.name, this.current, {
         show: this.name === this.current,
         backdropTransition: this.backdropTransition,
-        contentTransition: this.contentTransition
+        contentTransition: this.contentTransition,
+        disableBackdrop: this.disableBackdrop
       }, this.$slots.default)
     }
   }

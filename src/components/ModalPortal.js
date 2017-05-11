@@ -63,9 +63,13 @@ export default {
         h,
         {
           props: modal.props,
-          // It is required to provide noop as leave hook
-          // because previous leave hook may parsist.
-          on: { leave: noop }
+          on: {
+            // It is required to provide noop as leave hook
+            // because previous leave hook may parsist.
+            leave: noop,
+
+            close: () => this.$emit('close')
+          }
         },
         modal.children
       )

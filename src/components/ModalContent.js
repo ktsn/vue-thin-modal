@@ -8,12 +8,13 @@ export default {
 
   props: {
     show: Boolean,
+    disableBackdrop: Boolean,
     contentTransition: Object
   },
 
   render (h: Function, { props, data, children }: any) {
     const listeners = data.on || {}
-    const { show, contentTransition } = props
+    const { show, disableBackdrop, contentTransition } = props
     const child = ensureOnlyChild(children)
 
     if (child) {
@@ -31,6 +32,16 @@ export default {
         attrs: {
           role: 'dialog',
           'aria-hidden': String(!show)
+        },
+        on: {
+          click: (event: Event) => {
+            if (disableBackdrop) return
+            if (event.target !== event.currentTarget) return
+
+            if (listeners.close) {
+              listeners.close()
+            }
+          }
         }
       }, [
         h('transition', transitionData, [
