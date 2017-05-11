@@ -51,7 +51,13 @@
 }
 
 .modal-content {
+  position: absolute;
+  left: 0;
+  right: 0;
   opacity: 1;
+  margin: 30px auto;
+  padding: 30px;
+  width: 800px;
   background-color: #fff;
   transform: translateY(0);
 }

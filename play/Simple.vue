@@ -52,16 +52,6 @@ export default {
 </script>
 
 <style scoped>
-.basic-modal {
-  margin: 30px auto;
-  padding: 30px;
-  width: 800px;
-}
-.basic-modal.modal-content-leave-active {
-  position: absolute;
-  left: 0;
-  right: 0;
-}
 .title {
   margin: 0;
   font-weight: normal;
