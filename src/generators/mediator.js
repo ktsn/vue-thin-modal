@@ -1,5 +1,7 @@
 // @flow
 
+import { activeElement } from '../dom'
+
 export interface Mediator {
   currentName: string;
   push (name: string): void;
@@ -23,16 +25,32 @@ export function generateMediator (Vue: any): Mediator {
 
     methods: {
       push (name: string): void {
-        this.stack.push({ name })
+        const focusedElement = activeElement()
+        if (focusedElement) {
+          focusedElement.blur()
+        }
+
+        const item = {
+          name,
+          focusedElement
+        }
+
+        // Prevent to make reactive
+        Object.freeze(item)
+
+        this.stack.push(item)
       },
 
       pop (): void {
-        this.stack.pop()
+        const { focusedElement } = this.stack.pop()
+        if (focusedElement) {
+          focusedElement.focus()
+        }
       },
 
       replace (name: string): void {
-        this.stack.pop()
-        this.stack.push({ name })
+        this.pop()
+        this.push(name)
       }
     }
   })

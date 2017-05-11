@@ -20,3 +20,9 @@ export function removeDocumentClass (className: string): void {
     document.documentElement.classList.remove(className)
   }
 }
+
+export function activeElement (): ?HTMLElement {
+  if (isBrowser) {
+    return document.activeElement
+  }
+}
