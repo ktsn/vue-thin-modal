@@ -1,0 +1,14 @@
+---
+  extends: eslint-config-ktsn
+  parser: babel-eslint
+  plugins:
+    - flowtype
+  env:
+    es6: true
+    node: true
+  parserOptions:
+    ecmaVersion: 6
+    sourceType: module
+  rules:
+    flowtype/define-flow-type: 1
+    flowtype/use-flow-type: 1
