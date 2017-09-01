@@ -58,7 +58,7 @@ export function generateModal (Vue: any, mediator: Mediator) {
         backdropTransition: this.backdropTransition,
         contentTransition: this.contentTransition,
         disableBackdrop: this.disableBackdrop
-      }, this.$slots.default)
+      }, this.$slots)
     }
   }
 }

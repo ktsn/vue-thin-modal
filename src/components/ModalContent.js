@@ -12,10 +12,10 @@ export default {
     contentTransition: Object
   },
 
-  render (h: Function, { props, data, children }: any) {
+  render (h: Function, { props, data, slots }: any) {
     const listeners = data.on || {}
     const { show, disableBackdrop, contentTransition } = props
-    const child = ensureOnlyChild(children)
+    const child = ensureOnlyChild(slots().default || [])
 
     if (child) {
       addStaticClass(child.data, 'modal-content')
