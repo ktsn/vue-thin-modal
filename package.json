@@ -20,7 +20,7 @@
     "url": "https://github.com/ktsn/vue-thin-modal.git"
   },
   "scripts": {
-    "prepublish": "npm run release",
+    "prepublishOnly": "npm run release",
     "clean": "rm -rf dist",
     "build": "cross-env NODE_ENV=production node scripts/build.js",
     "build:example": "webpack --config examples/webpack.config.js",
