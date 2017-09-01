@@ -83,6 +83,12 @@ $ yarn add vue-thin-modal
 
   Same as `content-transition` except for the modal backdrop.
 
+#### Slots
+
+* `(default)` - A modal content. Must be only element.
+
+* `backdrop` - A modal backdrop element.
+
 ### `this.$modal` mediator
 
 #### Properties

@@ -11,7 +11,7 @@ export default {
     backdropTransition: Object
   },
 
-  render (h: Function, { props, data }: any) {
+  render (h: Function, { props, data, slots }: any) {
     const listeners = data.on || {}
     const { show, backdropTransition } = props
 
@@ -21,7 +21,7 @@ export default {
     )
 
     return h('transition', transitionData, [
-      show && h('div', { staticClass: 'modal-backdrop' })
+      show && (slots().default || h('div', { staticClass: 'modal-backdrop' }))
     ])
   }
 }

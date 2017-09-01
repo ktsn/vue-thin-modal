@@ -7,11 +7,18 @@ import { wait, noop } from '../utils'
 
 const openClassBody = 'modal-open'
 
+interface ModalSlots {
+  default?: any[];
+  backdrop?: any[];
+}
+
 export default {
   name: 'modal-portal',
 
   methods: {
-    update (name: string, current: string, props: any, children: any[]) {
+    update (name: string, current: string, props: any, slots: ModalSlots) {
+      const children = slots.default || []
+
       // Inject key into children vnode
       children.forEach(child => {
         if (child.key) return
@@ -25,7 +32,8 @@ export default {
       this._current = current
       this._modals[name] = {
         props,
-        children
+        children,
+        backdrop: slots.backdrop
       }
 
       this.scheduleUpdate()
@@ -71,7 +79,8 @@ export default {
             close: () => this.$emit('close')
           }
         },
-        modal.children
+        modal.children,
+        modal.backdrop
       )
     } else {
       const numTransition = 2
@@ -87,10 +96,10 @@ export default {
   }
 }
 
-function createModalVNode (h: Function, data: any, children: any[]) {
+function createModalVNode (h: Function, data: any, children: any[], backdrop: ?any) {
   return (
     h('div', { staticClass: 'modal-wrapper' }, [
-      h(Backdrop, data),
+      h(Backdrop, data, backdrop),
       h(ModalContent, data, children)
     ])
   )
