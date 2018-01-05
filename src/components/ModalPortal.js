@@ -2,7 +2,7 @@
 
 import Backdrop from './Backdrop'
 import ModalContent from './ModalContent'
-import { addDocumentClass, removeDocumentClass } from '../dom'
+import { addDocumentClass, removeDocumentClass, setDocumentCss, getScrollBarWidth } from '../dom'
 import { wait, noop } from '../utils'
 
 const openClassBody = 'modal-open'
@@ -61,6 +61,10 @@ export default {
 
   render (h: Function) {
     if (this._current != null) {
+      const padding = getScrollBarWidth()
+      if (padding) {
+        setDocumentCss('paddingRight', padding + 'px')
+      }
       addDocumentClass(openClassBody)
     }
 
@@ -88,6 +92,7 @@ export default {
       // Wait until all transition element are leaved
       // and remove the class from document element after that.
       const onAfterLeave = wait(numTransition, () => {
+        setDocumentCss('paddingRight', '')
         removeDocumentClass(openClassBody)
       })
 

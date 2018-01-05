@@ -21,6 +21,20 @@ export function removeDocumentClass (className: string): void {
   }
 }
 
+export function setDocumentCss (name: string, value: string): void {
+  if (isBrowser && document.documentElement) {
+    const s: any = document.documentElement.style
+    s[name] = value
+  }
+}
+
+export function getScrollBarWidth (): ?number {
+  if (!isBrowser || !document.documentElement) {
+    return null
+  }
+  return window.innerWidth - document.documentElement.offsetWidth
+}
+
 export function activeElement (): ?HTMLElement {
   if (isBrowser) {
     return document.activeElement
