@@ -27,7 +27,7 @@ export function onAfterLeave (vnodeData: Object, cb: ?() => void): Object {
   if (!cb) return vnodeData
 
   const hooks = vnodeData.on || {}
-  const prev = hooks.afterLeave
+  const prev: Function = hooks.afterLeave
 
   if (prev) {
     hooks.afterLeave = el => {
