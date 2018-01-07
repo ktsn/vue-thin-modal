@@ -10,7 +10,7 @@ const banner = `/*!
  * ${meta.name} v${meta.version}
  * ${meta.homepage}
  *
- * Copyright (c) 2017 ${meta.author}
+ * Copyright (c) 2017-present ${meta.author}
  * Released under the MIT license
  * ${meta.homepage}/blob/master/LICENSE
  */`
@@ -41,6 +41,13 @@ rollup(config)
   .then(bundle => {
     return write(bundle, `dist/${meta.name}.cjs.js`, {
       format: 'cjs',
+      banner
+    })
+  })
+  .then(() => rollup(config))
+  .then(bundle => {
+    return write(bundle, `dist/${meta.name}.esm.js`, {
+      format: 'es',
       banner
     })
   })

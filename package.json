@@ -10,6 +10,7 @@
   ],
   "license": "MIT",
   "main": "dist/vue-thin-modal.cjs.js",
+  "module": "dist/vue-thin-modal.esm.js",
   "files": [
     "dist"
   ],
