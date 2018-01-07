@@ -79,6 +79,7 @@ rollup(config)
   }))
   .catch(error => {
     console.error(error)
+    process.exit(1)
   })
 
 function addPlugins(config, plugins) {
