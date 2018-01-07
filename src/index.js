@@ -15,6 +15,8 @@ function install (_Vue: any) {
   Vue.component('modal', generateModal(Vue, mediator))
 }
 
+export { generateModal, generateMediator }
+
 export default {
   install
 }
