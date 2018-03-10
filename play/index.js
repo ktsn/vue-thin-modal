@@ -7,7 +7,8 @@ import '../dist/vue-thin-modal.css'
 import Simple from './Simple.vue'
 import DisableBackdrop from './disableBackdrop.vue'
 import BackdropSlot from './BackdropSlot.vue'
-import ScrollBar from './ScrollBar.vue'
+import Scroll from './Scroll.vue'
+import ScrollSemanticUi from './ScrollSemanticUi'
 
 Vue.use(VueModal)
 
@@ -15,4 +16,5 @@ play('Vue Modal')
   .add('Simple', Simple)
   .add('DisableBackdrop', DisableBackdrop)
   .add('BackdropSlot', BackdropSlot)
-  .add('ScrollBar', ScrollBar)
+  .add('Scroll', Scroll)
+  .add('ScrollSemanticUi', ScrollSemanticUi)

@@ -2,7 +2,7 @@
 
 import Backdrop from './Backdrop'
 import ModalContent from './ModalContent'
-import { addDocumentClass, removeDocumentClass, setDocumentCss, getScrollBarWidth } from '../dom'
+import { addBodyClass, removeBodyClass, setBodyCss, getScrollBarWidth } from '../dom'
 import { wait, noop } from '../utils'
 
 const openClassBody = 'modal-open'
@@ -63,9 +63,9 @@ export default {
     if (this._current != null) {
       const padding = getScrollBarWidth()
       if (padding) {
-        setDocumentCss('paddingRight', padding + 'px')
+        setBodyCss('paddingRight', padding + 'px')
       }
-      addDocumentClass(openClassBody)
+      addBodyClass(openClassBody)
     }
 
     const modal = this._modals[this._current]
@@ -92,8 +92,8 @@ export default {
       // Wait until all transition element are leaved
       // and remove the class from document element after that.
       const onAfterLeave = wait(numTransition, () => {
-        setDocumentCss('paddingRight', '')
-        removeDocumentClass(openClassBody)
+        setBodyCss('paddingRight', '')
+        removeBodyClass(openClassBody)
       })
 
       return createModalVNode(h, { on: { leave: onAfterLeave }}, [])
