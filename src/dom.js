@@ -9,21 +9,21 @@ export function appendToBody (el: HTMLElement): void {
   }
 }
 
-export function addDocumentClass (className: string): void {
-  if (isBrowser && document.documentElement) {
-    document.documentElement.classList.add(className)
+export function addBodyClass (className: string): void {
+  if (isBrowser && document.body) {
+    document.body.classList.add(className)
   }
 }
 
-export function removeDocumentClass (className: string): void {
-  if (isBrowser && document.documentElement) {
-    document.documentElement.classList.remove(className)
+export function removeBodyClass (className: string): void {
+  if (isBrowser && document.body) {
+    document.body.classList.remove(className)
   }
 }
 
-export function setDocumentCss (name: string, value: string): void {
-  if (isBrowser && document.documentElement) {
-    const s: any = document.documentElement.style
+export function setBodyCss (name: string, value: string): void {
+  if (isBrowser && document.body) {
+    const s: any = document.body.style
     s[name] = value
   }
 }

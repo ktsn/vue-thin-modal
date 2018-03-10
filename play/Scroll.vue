@@ -1,6 +1,9 @@
 <template>
   <div>
     <button class="button" type="button" @click="$modal.push('foo')">Open Modal</button>
+    <p class="float">
+      This should not move during opening/closing a modal
+    </p>
     <modal name="foo">
       <div class="basic-modal">
         <h1 class="title">Foo</h1>
@@ -18,6 +21,10 @@
   position: fixed;
   top: 40%;
   left: 350px;
+}
+
+.float {
+  float: right;
 }
 
 .long {
