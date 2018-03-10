@@ -36,7 +36,7 @@ export function generateModal (Vue: any, mediator: Mediator) {
       }
     },
 
-    beforeCreate () {
+    beforeMount () {
       if (!portal) {
         portal = new Vue(ModalPortal)
           .$mount()
