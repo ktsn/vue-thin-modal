@@ -16,6 +16,7 @@ export function generateModal (Vue: any, mediator: Mediator) {
         required: true
       },
       disableBackdrop: Boolean,
+      preMount: Boolean,
       backdropTransition: {
         type: Object,
         default () {
@@ -48,7 +49,7 @@ export function generateModal (Vue: any, mediator: Mediator) {
       portal.unregister()
     },
 
-    render () {
+    render (h: Function) {
       if (this.current && !portal.$el.parentNode) {
         appendToBody(portal.$el)
       }
@@ -59,6 +60,14 @@ export function generateModal (Vue: any, mediator: Mediator) {
         contentTransition: this.contentTransition,
         disableBackdrop: this.disableBackdrop
       }, this.$slots)
+
+      return this.preMount && this.current !== this.name
+        ? h('div', {
+          style: {
+            display: 'none'
+          }
+        }, this.$slots.default)
+        : h()
     }
   }
 }

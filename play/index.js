@@ -8,7 +8,8 @@ import Simple from './Simple.vue'
 import DisableBackdrop from './disableBackdrop.vue'
 import BackdropSlot from './BackdropSlot.vue'
 import Scroll from './Scroll.vue'
-import ScrollSemanticUi from './ScrollSemanticUi'
+import ScrollSemanticUi from './ScrollSemanticUi.vue'
+import PreMount from './PreMount.vue'
 
 Vue.use(VueModal)
 
@@ -18,3 +19,4 @@ play('Vue Modal')
   .add('BackdropSlot', BackdropSlot)
   .add('Scroll', Scroll)
   .add('ScrollSemanticUi', ScrollSemanticUi)
+  .add('PreMount', PreMount)
