@@ -71,9 +71,13 @@ $ yarn add vue-thin-modal
 
   Required as the modal name. The `name` must be unique against every modal you would use.
 
+* `pre-mount` - Boolean
+
+  If `true`, the modal contents will be pre mounted into the DOM tree. It is useful if you want to pre load the large images on your modal contents before opened.
+
 * `disable-backdrop` - Boolean
 
-  If `true`, The modal will not be closed by clicking backdrop.
+  If `true`, the modal will not be closed by clicking backdrop.
 
 * `content-transition` - Object
 
