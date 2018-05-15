@@ -46,7 +46,7 @@ export function generateModal (Vue: any, mediator: Mediator) {
     },
 
     beforeDestroy () {
-      portal.unregister()
+      portal.unregister(this.name)
     },
 
     render (h: Function) {
