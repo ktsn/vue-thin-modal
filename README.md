@@ -123,7 +123,7 @@ $ yarn add vue-thin-modal
 
 * push(name: string): void
 
-  Show the modal that cooresnponding with the `name`.
+  Show the modal that cooresponding with the `name`.
 
 * pop(): void
 
