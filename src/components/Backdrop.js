@@ -1,7 +1,5 @@
 // @flow
 
-import { onAfterLeave } from '../utils'
-
 export default {
   functional: true,
   name: 'backdrop',
@@ -15,10 +13,10 @@ export default {
     const listeners = data.on || {}
     const { show, backdropTransition } = props
 
-    const transitionData = onAfterLeave(
-      { props: backdropTransition },
-      listeners.leave
-    )
+    const transitionData = {
+      props: backdropTransition,
+      on: listeners
+    }
 
     return h('transition', transitionData, [
       show && (slots().default || h('div', { staticClass: 'modal-backdrop' }))
