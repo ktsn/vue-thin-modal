@@ -10,6 +10,7 @@ import BackdropSlot from './BackdropSlot.vue'
 import Scroll from './Scroll.vue'
 import ScrollSemanticUi from './ScrollSemanticUi.vue'
 import PreMount from './PreMount.vue'
+import Events from './Events.vue'
 
 Vue.use(VueModal)
 
@@ -20,3 +21,4 @@ play('Vue Modal')
   .add('Scroll', Scroll)
   .add('ScrollSemanticUi', ScrollSemanticUi)
   .add('PreMount', PreMount)
+  .add('Events', Events)

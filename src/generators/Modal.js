@@ -34,6 +34,19 @@ export function generateModal (Vue: any, mediator: Mediator) {
     computed: {
       current () {
         return mediator.currentName
+      },
+
+      eventListners () {
+        const events = ['before-open', 'opened', 'before-close', 'closed']
+        const listeners = {}
+        events.forEach(event => {
+          listeners[event] = (name: string) => {
+            if (this.name === name) {
+              this.$emit(event, name)
+            }
+          }
+        })
+        return listeners
       }
     },
 
@@ -43,10 +56,18 @@ export function generateModal (Vue: any, mediator: Mediator) {
           .$mount()
           .$on('click-backdrop', () => mediator.pop())
       }
+
+      Object.keys(this.eventListners).forEach(event => {
+        portal.$on(event, this.eventListners[event])
+      })
     },
 
     beforeDestroy () {
       portal.unregister(this.name)
+
+      Object.keys(this.eventListners).forEach(event => {
+        portal.$off(event, this.eventListners[event])
+      })
     },
 
     render (h: Function) {

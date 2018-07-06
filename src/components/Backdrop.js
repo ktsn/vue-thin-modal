@@ -9,13 +9,11 @@ export default {
     backdropTransition: Object
   },
 
-  render (h: Function, { props, data, slots }: any) {
-    const listeners = data.on || {}
+  render (h: Function, { props, slots }: any) {
     const { show, backdropTransition } = props
 
     const transitionData = {
-      props: backdropTransition,
-      on: listeners
+      props: backdropTransition
     }
 
     return h('transition', transitionData, [
