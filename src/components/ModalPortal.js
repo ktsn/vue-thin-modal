@@ -3,7 +3,6 @@
 import Backdrop from './Backdrop'
 import ModalContent from './ModalContent'
 import { addBodyClass, removeBodyClass, setBodyCss, getScrollBarWidth } from '../dom'
-import { only, wait } from '../utils'
 
 const openClassBody = 'modal-open'
 
@@ -29,8 +28,11 @@ export default {
         child.key = child.data.key = name
       })
 
-      this._prev = this._current
-      this._current = current
+      if (this._current !== current) {
+        this._prev = this._current
+        this._current = current
+      }
+
       this._modals[name] = {
         props,
         children,
@@ -80,18 +82,16 @@ export default {
   },
 
   render (h: Function) {
-    const numTransition = 2
-
     const modal = this._modals[this._current]
 
     const events = {
       // Only react the first transition event.
-      'before-enter': only(1, () => this.$emit('before-open', this._current)),
-      'before-leave': only(1, () => this.$emit('before-close', this._prev)),
+      'before-enter': () => this.$emit('before-open', this._current),
+      'before-leave': () => this.$emit('before-close', this._prev),
 
       // Need to wait until all transition element are completed
-      'after-enter': wait(numTransition, () => this.$emit('opened', this._current)),
-      'after-leave': wait(numTransition, () => this.$emit('closed', this._prev)),
+      'after-enter': () => this.$emit('opened', this._current),
+      'after-leave': () => this.$emit('closed', this._prev),
 
       'click-backdrop': () => this.$emit('click-backdrop')
     }

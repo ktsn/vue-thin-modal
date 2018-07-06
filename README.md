@@ -87,6 +87,24 @@ $ yarn add vue-thin-modal
 
   Same as `content-transition` except for the modal backdrop.
 
+#### Events
+
+* `before-open`
+
+  Emitted before opening a modal.
+
+* `opened`
+
+  Emitted after opening a modal.
+
+* `before-close`
+
+  Emitted before closing a modal.
+
+* `closed`
+
+  Emitted after closing a modal.
+
 #### Slots
 
 * `(default)` - A modal content. Must be only element.
