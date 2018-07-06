@@ -41,7 +41,7 @@ export function generateModal (Vue: any, mediator: Mediator) {
       if (!portal) {
         portal = new Vue(ModalPortal)
           .$mount()
-          .$on('close', () => mediator.pop())
+          .$on('click-backdrop', () => mediator.pop())
       }
     },
 

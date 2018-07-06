@@ -1,6 +1,6 @@
 // @flow
 
-import { addStaticClass, onAfterLeave, assert } from '../utils'
+import { addStaticClass, assert } from '../utils'
 
 export default {
   functional: true,
@@ -21,10 +21,10 @@ export default {
       addStaticClass(child.data, 'modal-content')
     }
 
-    const transitionData = onAfterLeave(
-      { props: contentTransition },
-      listeners.leave
-    )
+    const transitionData = {
+      props: contentTransition,
+      on: listeners
+    }
 
     return (
       h('div', {
@@ -38,8 +38,8 @@ export default {
             if (disableBackdrop) return
             if (event.target !== event.currentTarget) return
 
-            if (listeners.close) {
-              listeners.close()
+            if (listeners['click-backdrop']) {
+              listeners['click-backdrop']()
             }
           }
         }

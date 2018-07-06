@@ -1,7 +1,5 @@
 // @flow
 
-export function noop () {}
-
 export function addStaticClass (
   data: { staticClass: ?string },
   staticClass: string
@@ -13,35 +11,22 @@ export function addStaticClass (
   }
 }
 
-export function wait (times: number, cb: () => void): () => void {
+function pruneCallbackByCount (predicate: (count: number) => boolean, cb: () => void) {
   let count = 0
   return () => {
     count += 1
-    if (count >= times) {
+    if (predicate(count)) {
       cb()
     }
   }
 }
 
-export function onAfterLeave (vnodeData: Object, cb: ?() => void): Object {
-  if (!cb) return vnodeData
+export function only (times: number, cb: () => void): () => void {
+  return pruneCallbackByCount(count => count <= times, cb)
+}
 
-  const hooks = vnodeData.on || {}
-  const prev: Function = hooks.afterLeave
-
-  if (prev) {
-    hooks.afterLeave = el => {
-      prev(el)
-      // $FlowFixMe: ignore null type
-      cb()
-    }
-  } else {
-    hooks.afterLeave = cb
-  }
-
-  vnodeData.on = hooks
-
-  return vnodeData
+export function wait (times: number, cb: () => void): () => void {
+  return pruneCallbackByCount(count => count >= times, cb)
 }
 
 export function assert (value: any, message: string): void {
