@@ -61,6 +61,61 @@ $ yarn add vue-thin-modal
   </script>
   ```
 
+### Manually mount portal
+
+By default, the modal content will be automatically sent just under the `<body>` element by `<modal-portal>` component. You can disable this behavior by setting `autoMountPortal: false` option.
+
+```js
+import Vue from 'vue'
+import VueThinModal from 'vue-thin-modal'
+
+Vue.use(VueThinModal, {
+  autoMountPortal: false
+})
+```
+
+In that case, you have to put `<modal-portal>` by yourself.
+
+```vue
+<template>
+  <div id="app">
+    <!-- Application body goes here -->
+
+    <modal-portal />
+  </div>
+</template>
+```
+
+This is useful when you want to inject some plugin instance from the root Vue instance because the auto-mounted portal will not belong to the user defined root Vue instance. For example, you need to put the portal manually when you use [`vue-i18n`](https://github.com/kazupon/vue-i18n) plugin.
+
+```js
+import Vue from 'vue'
+import VueI18n from 'vue-i18n'
+import VueThinModal from 'vue-thin-modal'
+
+Vue.use(VueThinModal, {
+  autoMountPortal: false
+})
+
+Vue.use(VueI18n)
+
+// Create VueI18n instance with options
+const i18n = new VueI18n({
+  // vue-i18n options
+})
+
+
+new Vue({
+  el: '#app',
+
+  // Since you need to inject i18n instance here,
+  // you should put <modal-portal> by yourself.
+  i18n,
+
+  // ... remaining options ...
+})
+```
+
 ## References
 
 ### `<modal>` component
