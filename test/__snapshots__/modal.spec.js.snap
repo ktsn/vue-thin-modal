@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal allows to manually mount modal portal when autoMountPortal: false 1`] = `"<div><!----> <div class=\\"modal-wrapper\\"><div class=\\"modal-backdrop modal-backdrop-enter modal-backdrop-enter-active\\"></div><div role=\\"dialog\\" aria-hidden=\\"false\\" class=\\"modal-content-wrapper\\"><p class=\\"modal-content modal-content-enter modal-content-enter-active\\">Hello!</p></div></div></div>"`;
