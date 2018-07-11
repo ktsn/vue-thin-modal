@@ -3,7 +3,6 @@
 import Backdrop from './Backdrop'
 import ModalContent from './ModalContent'
 import { addBodyClass, removeBodyClass, setBodyCss, getScrollBarWidth } from '../dom'
-import { setPortal } from '../state'
 import { assert } from '../utils'
 
 const openClassBody = 'modal-open'
@@ -59,8 +58,8 @@ export default {
     }
   },
 
-  created () {
-    setPortal(this)
+  beforeCreate () {
+    this.$modal._setPortal(this)
   },
 
   beforeMount () {

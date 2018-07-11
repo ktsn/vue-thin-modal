@@ -1,8 +1,8 @@
 // @flow
 
 import { assert } from './utils'
+import Modal from './components/Modal'
 import ModalPortal from './components/ModalPortal'
-import { generateModal } from './generators/Modal'
 import { generateMediator } from './generators/mediator'
 import { appendToBody, onReady } from './dom'
 
@@ -17,8 +17,8 @@ function install (_Vue: any, options: VueThinModalOptions = {}) {
 
   Vue = _Vue
 
-  const mediator = Vue.prototype.$modal = generateMediator(Vue)
-  Vue.component('modal', generateModal(Vue, mediator))
+  Vue.prototype.$modal = generateMediator(Vue)
+  Vue.component('modal', Modal)
   Vue.component('modal-portal', ModalPortal)
 
   if (options.autoMountPortal !== false) {
@@ -32,7 +32,7 @@ function install (_Vue: any, options: VueThinModalOptions = {}) {
   }
 }
 
-export { generateModal, generateMediator }
+export { Modal, ModalPortal, generateMediator }
 
 export default {
   install
