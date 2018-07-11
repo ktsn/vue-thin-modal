@@ -1,6 +1,7 @@
 // @flow
 
 import { activeElement } from '../dom'
+import { assert } from '../utils'
 
 export interface Mediator {
   currentName: string;
@@ -10,9 +11,14 @@ export interface Mediator {
 }
 
 export function generateMediator (Vue: any): Mediator {
+  const state = {
+    portal: null
+  }
+
   return new Vue({
     data: {
-      stack: []
+      stack: [],
+      prevName: null
     },
 
     computed: {
@@ -51,6 +57,22 @@ export function generateMediator (Vue: any): Mediator {
       replace (name: string): void {
         this.pop()
         this.push(name)
+      },
+
+      _setPortal(portal: any): void {
+        assert(!state.portal, '<modal-portal> is already created.')
+        state.portal = portal
+      },
+
+      _getPortal(): any {
+        assert(state.portal, 'You need to put <modal-portal> or set `autoMountPortal: true` plugin option.')
+        return state.portal
+      }
+    },
+
+    watch: {
+      currentName (_, prevName) {
+        this.prevName = prevName
       }
     }
   })

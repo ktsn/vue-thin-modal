@@ -39,3 +39,9 @@ export function activeElement (): ?HTMLElement {
     return document.activeElement
   }
 }
+
+export function onReady (cb: () => void): void {
+  if (isBrowser) {
+    document.addEventListener('DOMContentLoaded', cb)
+  }
+}

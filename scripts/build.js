@@ -25,7 +25,16 @@ const config = {
   input: 'src/index.js',
   plugins: [
     babel({
-      exclude: 'node_modules/**'
+      exclude: 'node_modules/**',
+      babelrc: false,
+      presets: [
+        ['es2015', { modules: false }]
+      ],
+      plugins: [
+        'external-helpers',
+        'transform-flow-strip-types',
+        'transform-class-properties'
+      ]
     })
   ],
   external: ['vue']
