@@ -17,7 +17,8 @@ export function generateMediator (Vue: any): Mediator {
 
   return new Vue({
     data: {
-      stack: []
+      stack: [],
+      prevName: null
     },
 
     computed: {
@@ -66,6 +67,12 @@ export function generateMediator (Vue: any): Mediator {
       _getPortal(): any {
         assert(state.portal, 'You need to put <modal-portal> or set `autoMountPortal: true` plugin option.')
         return state.portal
+      }
+    },
+
+    watch: {
+      currentName (_, prevName) {
+        this.prevName = prevName
       }
     }
   })

@@ -15,8 +15,18 @@ interface ModalSlots {
 export default {
   name: 'modal-portal',
 
+  computed: {
+    prev () {
+      return this.$modal.prevName
+    },
+
+    current () {
+      return this.$modal.currentName
+    }
+  },
+
   methods: {
-    update (name: string, current: string, props: any, slots: ModalSlots) {
+    update (name: string, props: any, slots: ModalSlots) {
       const children = slots.default || []
 
       // Inject key into children vnode
@@ -28,11 +38,6 @@ export default {
         }
         child.key = child.data.key = name
       })
-
-      if (this._current !== current) {
-        this._prev = this._current
-        this._current = current
-      }
 
       this._modals[name] = {
         props,
@@ -63,8 +68,6 @@ export default {
   },
 
   beforeMount () {
-    this._prev = null
-    this._current = null
     this._modals = {}
     this._scheduled = false
 
@@ -73,7 +76,7 @@ export default {
     })
 
     this.$on('before-open', () => {
-      if (this._current != null) {
+      if (this.current != null) {
         const padding = getScrollBarWidth()
         if (padding) {
           setBodyCss('paddingRight', padding + 'px')
@@ -83,7 +86,7 @@ export default {
     })
 
     this.$on('closed', () => {
-      if (this._current == null) {
+      if (this.current == null) {
         setBodyCss('paddingRight', '')
         removeBodyClass(openClassBody)
       }
@@ -95,16 +98,16 @@ export default {
   },
 
   render (h: Function) {
-    const modal = this._modals[this._current]
+    const modal = this._modals[this.current]
 
     const events = {
       // Only react the first transition event.
-      'before-enter': () => this.$emit('before-open', this._current),
-      'before-leave': () => this.$emit('before-close', this._prev),
+      'before-enter': () => this.$emit('before-open', this.current),
+      'before-leave': () => this.$emit('before-close', this.prev),
 
       // Need to wait until all transition element are completed
-      'after-enter': () => this.$emit('opened', this._current),
-      'after-leave': () => this.$emit('closed', this._prev),
+      'after-enter': () => this.$emit('opened', this.current),
+      'after-leave': () => this.$emit('closed', this.prev),
 
       'click-backdrop': () => this.$emit('click-backdrop')
     }

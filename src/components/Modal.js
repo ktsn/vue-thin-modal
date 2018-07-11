@@ -48,6 +48,13 @@ export default {
     Object.keys(this.eventListners).forEach(event => {
       portal.$on(event, this.eventListners[event])
     })
+
+    portal.update.apply(portal, this._modalDataForPortal)
+  },
+
+  updated () {
+    const portal = this.$modal._getPortal()
+    portal.update.apply(portal, this._modalDataForPortal)
   },
 
   beforeDestroy () {
@@ -59,18 +66,20 @@ export default {
     })
   },
 
-  updated () {
-    const portal = this.$modal._getPortal()
-
-    portal.update(this.name, this.current, {
-      show: this.name === this.current,
-      backdropTransition: this.backdropTransition,
-      contentTransition: this.contentTransition,
-      disableBackdrop: this.disableBackdrop
-    }, this.$slots)
-  },
-
   render (h: Function) {
+    // Gather the data for sending portal in render function
+    // so that rerendering will be triggered when dependencies are updated.
+    this._modalDataForPortal = [
+      this.name,
+      {
+        show: true,
+        backdropTransition: this.backdropTransition,
+        contentTransition: this.contentTransition,
+        disableBackdrop: this.disableBackdrop
+      },
+      this.$slots
+    ]
+
     return this.preMount && this.current !== this.name
       ? h('div', {
         style: {
