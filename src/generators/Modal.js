@@ -1,12 +1,9 @@
 // @flow
 
 import type { Mediator } from './mediator'
-import ModalPortal from '../components/ModalPortal'
-import { appendToBody } from '../dom'
+import { getPortal } from '../state'
 
 export function generateModal (Vue: any, mediator: Mediator) {
-  let portal
-
   return {
     name: 'modal',
 
@@ -50,30 +47,24 @@ export function generateModal (Vue: any, mediator: Mediator) {
       }
     },
 
-    beforeMount () {
-      if (!portal) {
-        portal = new Vue(ModalPortal)
-          .$mount()
-          .$on('click-backdrop', () => mediator.pop())
-      }
-
+    mounted () {
+      const portal = getPortal()
       Object.keys(this.eventListners).forEach(event => {
         portal.$on(event, this.eventListners[event])
       })
     },
 
     beforeDestroy () {
-      portal.unregister(this.name)
+      const portal = getPortal()
 
+      portal.unregister(this.name)
       Object.keys(this.eventListners).forEach(event => {
         portal.$off(event, this.eventListners[event])
       })
     },
 
     render (h: Function) {
-      if (this.current && !portal.$el.parentNode) {
-        appendToBody(portal.$el)
-      }
+      const portal = getPortal()
 
       portal.update(this.name, this.current, {
         show: this.name === this.current,
