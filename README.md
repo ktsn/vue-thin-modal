@@ -86,7 +86,7 @@ In that case, you have to put `<modal-portal>` by yourself.
 </template>
 ```
 
-This is useful when you want to inject some plugin instance from the root Vue instance because the auto-mounted portal will not belong to the user defined root Vue instance. For example, you need to put the portal manually when you use [`vue-i18n`](https://github.com/kazupon/vue-i18n) plugin.
+This is useful when you want to inject some plugin instances from the root Vue instance because the auto-mounted portal will not belong to the user defined root Vue instance. For example, you need to put the portal manually when you use [`vue-i18n`](https://github.com/kazupon/vue-i18n) plugin.
 
 ```js
 import Vue from 'vue'
