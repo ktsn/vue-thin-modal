@@ -15,6 +15,12 @@ interface ModalSlots {
 export default {
   name: 'modal-portal',
 
+  data () {
+    return {
+      modals: {}
+    }
+  },
+
   computed: {
     prev () {
       return this.$modal.prevName
@@ -39,27 +45,15 @@ export default {
         child.key = child.data.key = name
       })
 
-      this._modals[name] = {
+      this.$set(this.modals, name, {
         props,
         children,
         backdrop: slots.backdrop
-      }
-
-      this.scheduleUpdate()
-    },
-
-    scheduleUpdate () {
-      if (this._scheduled) return
-      this._scheduled = true
-
-      this.$nextTick(() => {
-        this.$forceUpdate()
-        this._scheduled = false
       })
     },
 
     unregister (name: string) {
-      this._modals[name] = undefined
+      this.$delete(this.modals, name)
     }
   },
 
@@ -68,9 +62,6 @@ export default {
   },
 
   beforeMount () {
-    this._modals = {}
-    this._scheduled = false
-
     this.$on('click-backdrop', () => {
       this.$modal.pop()
     })
@@ -98,7 +89,7 @@ export default {
   },
 
   render (h: Function) {
-    const modal = this._modals[this.current]
+    const modal = this.modals[this.current]
 
     const events = {
       // Only react the first transition event.
