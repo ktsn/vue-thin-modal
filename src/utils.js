@@ -13,6 +13,6 @@ export function addStaticClass (
 
 export function assert (value: any, message: string): void {
   if (!value) {
-    throw new Error('[vue-modal] ' + message)
+    throw new Error('[vue-thin-modal] ' + message)
   }
 }
