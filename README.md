@@ -60,6 +60,10 @@ $ yarn add vue-thin-modal
   }
   </script>
   ```
+  
+### Auto installing vue-thin-modal
+
+If you have `Vue` constructor on `window`, you don't need to call `Vue.use(VueThinModal)` since it will be called automatically. This is the case when you load Vue.js and vue-thin-modal via `<script>` element.
 
 ### Manually mount portal
 
