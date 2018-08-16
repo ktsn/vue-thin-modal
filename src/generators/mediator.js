@@ -48,9 +48,9 @@ export function generateMediator (Vue: any): Mediator {
       },
 
       pop (): void {
-        const { focusedElement } = this.stack.pop()
-        if (focusedElement) {
-          focusedElement.focus()
+        const item = this.stack.pop()
+        if (item && item.focusedElement) {
+          item.focusedElement.focus()
         }
       },
 
