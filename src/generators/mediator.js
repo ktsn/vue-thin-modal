@@ -16,7 +16,7 @@ export function generateMediator (Vue: any): Mediator {
   }
 
   return new Vue({
-    // Mark this Vue instance is a mediator to Avoid infinite loop
+    // Mark this Vue instance is a mediator to avoid infinite loop
     // by trying to create another mediator in the beforeCreate hook in this mediator.
     vueThinModalMediator: true,
 
