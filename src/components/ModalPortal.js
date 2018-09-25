@@ -2,7 +2,12 @@
 
 import Backdrop from './Backdrop'
 import ModalContent from './ModalContent'
-import { addBodyClass, removeBodyClass, setBodyCss, getScrollBarWidth } from '../dom'
+import {
+  addBodyClass,
+  removeBodyClass,
+  setBodyCss,
+  getScrollBarWidth
+} from '../dom'
 import { assert } from '../utils'
 
 const openClassBody = 'modal-open'
@@ -15,24 +20,24 @@ interface ModalSlots {
 export default {
   name: 'modal-portal',
 
-  data () {
+  data() {
     return {
       modals: {}
     }
   },
 
   computed: {
-    prev () {
+    prev() {
       return this.$modal.prevName
     },
 
-    current () {
+    current() {
       return this.$modal.currentName
     }
   },
 
   methods: {
-    update (name: string, props: any, slots: ModalSlots) {
+    update(name: string, props: any, slots: ModalSlots) {
       const children = slots.default || []
 
       // Inject key into children vnode
@@ -52,16 +57,16 @@ export default {
       })
     },
 
-    unregister (name: string) {
+    unregister(name: string) {
       this.$delete(this.modals, name)
     }
   },
 
-  beforeCreate () {
+  beforeCreate() {
     this.$modal._setPortal(this)
   },
 
-  beforeMount () {
+  beforeMount() {
     this.$on('click-backdrop', () => {
       this.$modal.pop()
     })
@@ -84,11 +89,14 @@ export default {
     })
   },
 
-  beforeDestroy () {
-    assert(false, '<modal-portal> should not be destroyed. If you are using v-if on <modal-portal>, use v-show instead.')
+  beforeDestroy() {
+    assert(
+      false,
+      '<modal-portal> should not be destroyed. If you are using v-if on <modal-portal>, use v-show instead.'
+    )
   },
 
-  render (h: Function) {
+  render(h: Function) {
     const modal = this.modals[this.current]
 
     const events = {
@@ -119,11 +127,14 @@ export default {
   }
 }
 
-function createModalVNode (h: Function, data: any, children: any[], backdrop: ?any) {
-  return (
-    h('div', { staticClass: 'modal-wrapper' }, [
-      h(Backdrop, data, backdrop),
-      h(ModalContent, data, children)
-    ])
-  )
+function createModalVNode(
+  h: Function,
+  data: any,
+  children: any[],
+  backdrop: ?any
+) {
+  return h('div', { staticClass: 'modal-wrapper' }, [
+    h(Backdrop, data, backdrop),
+    h(ModalContent, data, children)
+  ])
 }

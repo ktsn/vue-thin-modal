@@ -9,7 +9,7 @@ export default {
     backdropTransition: Object
   },
 
-  render (h: Function, { props, slots }: any) {
+  render(h: Function, { props, slots }: any) {
     const { show, backdropTransition } = props
 
     const transitionData = {

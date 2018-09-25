@@ -7,12 +7,12 @@ import { generateMediator } from './generators/mediator'
 import { appendToBody, onReady } from './dom'
 
 interface VueThinModalOptions {
-  autoMountPortal?: boolean
+  autoMountPortal?: boolean;
 }
 
 let Vue: any
 
-function install (_Vue: any, options: VueThinModalOptions = {}) {
+function install(_Vue: any, options: VueThinModalOptions = {}) {
   assert(Vue !== _Vue, 'Already installed')
 
   Vue = _Vue

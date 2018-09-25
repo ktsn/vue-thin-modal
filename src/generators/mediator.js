@@ -5,12 +5,12 @@ import { assert } from '../utils'
 
 export interface Mediator {
   currentName: string;
-  push (name: string): void;
-  pop (): void;
-  replace (name: string): void;
+  push(name: string): void;
+  pop(): void;
+  replace(name: string): void;
 }
 
-export function generateMediator (Vue: any): Mediator {
+export function generateMediator(Vue: any): Mediator {
   const state = {
     portal: null
   }
@@ -26,7 +26,7 @@ export function generateMediator (Vue: any): Mediator {
     },
 
     computed: {
-      currentName () {
+      currentName() {
         const stack = this.stack
         const modal = stack[stack.length - 1]
         return modal && modal.name
@@ -34,7 +34,7 @@ export function generateMediator (Vue: any): Mediator {
     },
 
     methods: {
-      push (name: string): void {
+      push(name: string): void {
         const focusedElement = activeElement()
         if (focusedElement) {
           focusedElement.blur()
@@ -51,14 +51,14 @@ export function generateMediator (Vue: any): Mediator {
         this.stack.push(item)
       },
 
-      pop (): void {
+      pop(): void {
         const item = this.stack.pop()
         if (item && item.focusedElement) {
           item.focusedElement.focus()
         }
       },
 
-      replace (name: string): void {
+      replace(name: string): void {
         this.pop()
         this.push(name)
       },
@@ -69,13 +69,16 @@ export function generateMediator (Vue: any): Mediator {
       },
 
       _getPortal(): any {
-        assert(state.portal, 'You need to put <modal-portal> or set `autoMountPortal: true` plugin option.')
+        assert(
+          state.portal,
+          'You need to put <modal-portal> or set `autoMountPortal: true` plugin option.'
+        )
         return state.portal
       }
     },
 
     watch: {
-      currentName (_, prevName) {
+      currentName(_, prevName) {
         this.prevName = prevName
       }
     }

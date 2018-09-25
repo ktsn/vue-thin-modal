@@ -12,7 +12,7 @@ export default {
     contentTransition: Object
   },
 
-  render (h: Function, { props, data, slots }: any) {
+  render(h: Function, { props, data, slots }: any) {
     const listeners = data.on || {}
     const { show, disableBackdrop, contentTransition } = props
     const child = ensureOnlyChild(slots().default || [])
@@ -26,8 +26,9 @@ export default {
       on: listeners
     }
 
-    return (
-      h('div', {
+    return h(
+      'div',
+      {
         staticClass: 'modal-content-wrapper',
         attrs: {
           role: 'dialog',
@@ -43,16 +44,13 @@ export default {
             }
           }
         }
-      }, [
-        h('transition', transitionData, [
-          show && child
-        ])
-      ])
+      },
+      [h('transition', transitionData, [show && child])]
     )
   }
 }
 
-function ensureOnlyChild (children) {
+function ensureOnlyChild(children) {
   const domChildren = children.filter(c => c.tag)
   assert(domChildren.length <= 1, 'Modal must have only one child')
   return domChildren[0]

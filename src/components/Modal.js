@@ -12,24 +12,24 @@ export default {
     preMount: Boolean,
     backdropTransition: {
       type: Object,
-      default () {
+      default() {
         return { name: 'modal-backdrop' }
       }
     },
     contentTransition: {
       type: Object,
-      default () {
+      default() {
         return { name: 'modal-content' }
       }
     }
   },
 
   computed: {
-    current () {
+    current() {
       return this.$modal.currentName
     },
 
-    eventListners () {
+    eventListners() {
       const events = ['before-open', 'opened', 'before-close', 'closed']
       const listeners = {}
       events.forEach(event => {
@@ -43,7 +43,7 @@ export default {
     }
   },
 
-  mounted () {
+  mounted() {
     const portal = this.$modal._getPortal()
     Object.keys(this.eventListners).forEach(event => {
       portal.$on(event, this.eventListners[event])
@@ -52,12 +52,12 @@ export default {
     portal.update.apply(portal, this._modalDataForPortal)
   },
 
-  updated () {
+  updated() {
     const portal = this.$modal._getPortal()
     portal.update.apply(portal, this._modalDataForPortal)
   },
 
-  beforeDestroy () {
+  beforeDestroy() {
     const portal = this.$modal._getPortal()
 
     portal.unregister(this.name)
@@ -66,7 +66,7 @@ export default {
     })
   },
 
-  render (h: Function) {
+  render(h: Function) {
     // Gather the data for sending portal in render function
     // so that rerendering will be triggered when dependencies are updated.
     this._modalDataForPortal = [
@@ -81,11 +81,15 @@ export default {
     ]
 
     return this.preMount && this.current !== this.name
-      ? h('div', {
-        style: {
-          display: 'none'
-        }
-      }, this.$slots.default)
+      ? h(
+          'div',
+          {
+            style: {
+              display: 'none'
+            }
+          },
+          this.$slots.default
+        )
       : h()
   }
 }

@@ -1,6 +1,6 @@
 // @flow
 
-export function addStaticClass (
+export function addStaticClass(
   data: { staticClass: ?string },
   staticClass: string
 ): void {
@@ -11,7 +11,7 @@ export function addStaticClass (
   }
 }
 
-export function assert (value: any, message: string): void {
+export function assert(value: any, message: string): void {
   if (!value) {
     throw new Error('[vue-thin-modal] ' + message)
   }

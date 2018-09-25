@@ -27,14 +27,8 @@ const config = {
     babel({
       exclude: 'node_modules/**',
       babelrc: false,
-      presets: [
-        ['es2015', { modules: false }]
-      ],
-      plugins: [
-        'external-helpers',
-        'transform-flow-strip-types',
-        'transform-class-properties'
-      ]
+      presets: [['env', { modules: false }], 'flow'],
+      plugins: ['external-helpers', 'transform-class-properties']
     })
   ],
   external: ['vue']
@@ -60,39 +54,51 @@ rollup(config)
       banner
     })
   })
-  .then(() => rollup(addPlugins(config, [
-    replace({
-      'process.env.NODE_ENV': JSON.stringify('development')
+  .then(() =>
+    rollup(
+      addPlugins(config, [
+        replace({
+          'process.env.NODE_ENV': JSON.stringify('development')
+        })
+      ])
+    )
+  )
+  .then(bundle =>
+    write(bundle, `dist/${meta.name}.js`, {
+      format: 'umd',
+      banner,
+      name,
+      globals
     })
-  ])))
-  .then(bundle => write(bundle, `dist/${meta.name}.js`, {
-    format: 'umd',
-    banner,
-    name,
-    globals
-  }))
-  .then(() => rollup(addPlugins(config, [
-    replace({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    uglify({
-      output: {
-        comments(node, comment) {
-          const text = comment.value
-          const type = comment.type
-          if (type === 'comment2') {
-            return /^!/i.test(text)
+  )
+  .then(() =>
+    rollup(
+      addPlugins(config, [
+        replace({
+          'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        uglify({
+          output: {
+            comments(node, comment) {
+              const text = comment.value
+              const type = comment.type
+              if (type === 'comment2') {
+                return /^!/i.test(text)
+              }
+            }
           }
-        }
-      }
+        })
+      ])
+    )
+  )
+  .then(bundle =>
+    write(bundle, `dist/${meta.name}.min.js`, {
+      format: 'umd',
+      banner,
+      name,
+      globals
     })
-  ])))
-  .then(bundle => write(bundle, `dist/${meta.name}.min.js`, {
-    format: 'umd',
-    banner,
-    name,
-    globals
-  }))
+  )
   .catch(error => {
     console.error(error)
     process.exit(1)
@@ -113,14 +119,16 @@ function mkdirIfNotExists(dirPath) {
 }
 
 function write(bundle, dest, config) {
-  return bundle.generate(Object.assign({ exports: 'named' }, config))
-    .then(({ code }) => new Promise((resolve, reject) => {
-      fs.writeFile(dest, code, error => {
-        if (error) return reject(error)
-        console.log(green(dest) + ' ' + size(code))
-        resolve()
+  return bundle.generate(Object.assign({ exports: 'named' }, config)).then(
+    ({ code }) =>
+      new Promise((resolve, reject) => {
+        fs.writeFile(dest, code, error => {
+          if (error) return reject(error)
+          console.log(green(dest) + ' ' + size(code))
+          resolve()
+        })
       })
-    }))
+  )
 }
 
 function green(str) {
