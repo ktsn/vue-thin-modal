@@ -45,7 +45,7 @@ function install (_Vue: any, options: VueThinModalOptions = {}) {
     // Then we can handle SSR environment which may create multiple instances of portal among each sessions.
     Vue.mixin({
       beforeCreate() {
-        if (!this.$parent) {
+        if (!this.$parent && !this.$options.vueThinModalMediator) {
           this.$_vueThinModal = generateMediator(Vue)
         }
       }
