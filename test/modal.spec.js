@@ -1,4 +1,5 @@
 import { mount, createLocalVue } from '@vue/test-utils'
+import { render } from '@vue/server-test-utils'
 import VueThinModal from '../src'
 
 describe('Modal', () => {
@@ -27,5 +28,31 @@ describe('Modal', () => {
     wrapper.vm.$modal.push('test')
     await wrapper.vm.$nextTick()
     expect(wrapper.html()).toMatchSnapshot()
+  })
+
+  describe('SSR', () => {
+    const localVue = createLocalVue()
+    localVue.use(VueThinModal, {
+      autoMountPortal: false
+    })
+
+    it('not throws when render modal-portal in multiple times', () => {
+      const App = {
+        template: `<div>
+          <modal name="test">
+            <p>Hi</p>
+          </modal>
+          <modal-portal />
+        </div>`
+      }
+
+      expect(() => {
+        render(App, { localVue })
+      }).not.toThrow()
+
+      expect(() => {
+        render(App, { localVue })
+      }).not.toThrow()
+    })
   })
 })
