@@ -17,11 +17,13 @@ function install (_Vue: any, options: VueThinModalOptions = {}) {
 
   Vue = _Vue
 
-  Object.defineProperty(Vue.prototype, '$modal', {
+  const descriptor: any = {
     get() {
       return this.$root.$_vueThinModal
     }
-  })
+  }
+
+  Object.defineProperty(Vue.prototype, '$modal', descriptor)
 
   Vue.component('modal', Modal)
   Vue.component('modal-portal', ModalPortal)
