@@ -1,6 +1,6 @@
 /* eslint-env browser */
 
-const isBrowser = typeof window !== undefined
+const isBrowser = typeof window !== 'undefined'
 
 export function appendToBody(el: HTMLElement): void {
   if (isBrowser) {
