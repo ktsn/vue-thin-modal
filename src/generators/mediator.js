@@ -64,7 +64,6 @@ export function generateMediator(Vue: any): Mediator {
       },
 
       _setPortal(portal: any): void {
-        assert(!state.portal, '<modal-portal> is already created.')
         state.portal = portal
       },
 

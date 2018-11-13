@@ -8,7 +8,6 @@ import {
   setBodyCss,
   getScrollBarWidth
 } from '../dom'
-import { assert } from '../utils'
 
 const openClassBody = 'modal-open'
 
@@ -87,13 +86,6 @@ export default {
         removeBodyClass(openClassBody)
       }
     })
-  },
-
-  beforeDestroy() {
-    assert(
-      false,
-      '<modal-portal> should not be destroyed. If you are using v-if on <modal-portal>, use v-show instead.'
-    )
   },
 
   render(h: Function) {
