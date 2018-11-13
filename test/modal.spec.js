@@ -17,7 +17,7 @@ describe('Modal', () => {
         <modal-portal />
       </div>`,
 
-      data () {
+      data() {
         return {
           message: 'Hello!'
         }
