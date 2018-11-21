@@ -138,13 +138,13 @@ new Vue({
 
   If `true`, the modal will not be closed by clicking backdrop.
 
-* `content-transition` - Object
+* `content-transition` - String | Object
 
-  It is the same options as the props of Vue's `<transition>` component. You can customize the modal content transition by using this prop. If omitted a default transition will be used.
+  The transition property for the modal content. When passing `String` as the value, it will be used as transition name. When passing `Object`, it may contain the same options for the Vue's `<transition>` component. If omitted, the default value – `{ name: 'modal-content' }` – will be used.
 
-* `backdrop-transition` - Object
+* `backdrop-transition` - String | Object
 
-  Same as `content-transition` except for the modal backdrop.
+  Same as `content-transition` except for the modal backdrop. The default value is `{ name: 'modal-backdrop' }`
 
 #### Events
 

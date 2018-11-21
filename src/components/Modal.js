@@ -11,13 +11,13 @@ export default {
     disableBackdrop: Boolean,
     preMount: Boolean,
     backdropTransition: {
-      type: Object,
+      type: [String, Object],
       default() {
         return { name: 'modal-backdrop' }
       }
     },
     contentTransition: {
-      type: Object,
+      type: [String, Object],
       default() {
         return { name: 'modal-content' }
       }
@@ -27,6 +27,22 @@ export default {
   computed: {
     current() {
       return this.$modal.currentName
+    },
+
+    computedBackdropTransition() {
+      if (typeof this.contentTransition === 'string') {
+        return { name: this.backdropTransition }
+      }
+
+      return this.backdropTransition
+    },
+
+    computedContentTransition() {
+      if (typeof this.contentTransition === 'string') {
+        return { name: this.contentTransition }
+      }
+
+      return this.contentTransition
     },
 
     eventListners() {
@@ -74,8 +90,8 @@ export default {
       {
         show: true,
         backdropTransition: this.backdropTransition,
-        contentTransition: this.contentTransition,
-        disableBackdrop: this.disableBackdrop
+        contentTransition: this.computedContentTransition,
+        disableBackdrop: this.computedDisableBackdrop
       },
       this.$slots
     ]
