@@ -89,9 +89,9 @@ export default {
       this.name,
       {
         show: true,
-        backdropTransition: this.backdropTransition,
+        backdropTransition: this.computedBackdropTransition,
         contentTransition: this.computedContentTransition,
-        disableBackdrop: this.computedDisableBackdrop
+        disableBackdrop: this.disableBackdrop
       },
       this.$slots
     ]

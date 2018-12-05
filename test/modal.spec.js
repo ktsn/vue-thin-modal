@@ -30,6 +30,60 @@ describe('Modal', () => {
     expect(wrapper.html()).toMatchSnapshot()
   })
 
+  it('closes modal on clicking backdrop', async () => {
+    const localVue = createLocalVue()
+    localVue.use(VueThinModal, {
+      autoMountPortal: false
+    })
+
+    const App = {
+      template: `<div>
+        <modal name="test">
+          <p>content</p>
+        </modal>
+        <modal-portal />
+      </div>`
+    }
+
+    const wrapper = mount(App, { localVue })
+    wrapper.vm.$modal.push('test')
+
+    await wrapper.vm.$nextTick()
+
+    wrapper.find('.modal-content-wrapper').trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.$modal.currentName).toBe(undefined)
+  })
+
+  it('disables to close modal on clicking backdrop', async () => {
+    const localVue = createLocalVue()
+    localVue.use(VueThinModal, {
+      autoMountPortal: false
+    })
+
+    const App = {
+      template: `<div>
+        <modal name="test" disable-backdrop>
+          <p>content</p>
+        </modal>
+        <modal-portal />
+      </div>`
+    }
+
+    const wrapper = mount(App, { localVue })
+    wrapper.vm.$modal.push('test')
+
+    await wrapper.vm.$nextTick()
+
+    wrapper.find('.modal-content-wrapper').trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.vm.$modal.currentName).toBe('test')
+  })
+
   describe('SSR', () => {
     const localVue = createLocalVue()
     localVue.use(VueThinModal, {
