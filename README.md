@@ -1,5 +1,8 @@
 # vue-thin-modal
 
+[![Build Status](https://travis-ci.org/ktsn/vue-thin-modal.svg?branch=master)](https://travis-ci.org/ktsn/vue-thin-modal)
+[![vue-thin-modal Dev Token](https://badge.devtoken.rocks/vue-thin-modal)](https://devtoken.rocks/package/vue-thin-modal)
+
 vue-thin-modal provides thin but powerful modal component. Its styles, transitions and contents are fully customizable.
 
 ## Installation
