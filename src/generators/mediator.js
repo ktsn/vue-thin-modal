@@ -34,7 +34,7 @@ export function generateMediator(Vue: any): Mediator {
     },
 
     methods: {
-      push(name: string): void {
+      push(name: string, overlay?: boolean = false): void {
         const focusedElement = activeElement()
         if (focusedElement) {
           focusedElement.blur()
@@ -42,7 +42,8 @@ export function generateMediator(Vue: any): Mediator {
 
         const item = {
           name,
-          focusedElement
+          focusedElement,
+          overlay
         }
 
         // Prevent to make reactive
@@ -58,9 +59,9 @@ export function generateMediator(Vue: any): Mediator {
         }
       },
 
-      replace(name: string): void {
+      replace(name: string, overlay?: boolean = false): void {
         this.pop()
-        this.push(name)
+        this.push(name, overlay)
       },
 
       _setPortal(portal: any): void {
