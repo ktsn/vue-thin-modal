@@ -6,9 +6,9 @@ export interface VueThinModalOptions {
 
 declare class VueThinModal {
   currentName: string;
-  push(name: string): void;
+  push(name: string, overlay?: boolean): void;
   pop(): void;
-  replace(name: string): void;
+  replace(name: string, overlay?: boolean): void;
 }
 
 declare module 'vue/types/vue' {
