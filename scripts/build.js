@@ -27,8 +27,8 @@ const config = {
     babel({
       exclude: 'node_modules/**',
       babelrc: false,
-      presets: [['env', { modules: false }], 'flow'],
-      plugins: ['external-helpers', 'transform-class-properties']
+      presets: [['@babel/env', { modules: false }], '@babel/flow'],
+      plugins: ['@babel/proposal-class-properties']
     })
   ],
   external: ['vue']
@@ -119,16 +119,18 @@ function mkdirIfNotExists(dirPath) {
 }
 
 function write(bundle, dest, config) {
-  return bundle.generate(Object.assign({ exports: 'named' }, config)).then(
-    ({ code }) =>
-      new Promise((resolve, reject) => {
+  return bundle
+    .generate(Object.assign({ exports: 'named' }, config))
+    .then(({ output }) => {
+      const code = output[0].code
+      return new Promise((resolve, reject) => {
         fs.writeFile(dest, code, error => {
           if (error) return reject(error)
           console.log(green(dest) + ' ' + size(code))
           resolve()
         })
       })
-  )
+    })
 }
 
 function green(str) {
