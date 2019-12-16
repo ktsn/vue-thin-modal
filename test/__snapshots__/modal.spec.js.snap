@@ -4,9 +4,9 @@ exports[`Modal allows to manually mount modal portal when autoMountPortal: false
 <div>
   <!---->
   <div class="modal-wrapper">
-    <div class="modal-backdrop"></div>
+    <div class="modal-backdrop modal-backdrop-enter modal-backdrop-enter-active"></div>
     <div role="dialog" aria-hidden="false" class="modal-content-wrapper">
-      <p class="modal-content">Hello!</p>
+      <p class="modal-content modal-content-enter modal-content-enter-active">Hello!</p>
     </div>
   </div>
 </div>
