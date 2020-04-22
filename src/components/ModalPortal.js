@@ -15,6 +15,11 @@ interface ModalSlots {
   default?: any[];
   backdrop?: any[];
 }
+interface ModalData {
+  data: any;
+  children: any[];
+  backdrop: ?any;
+}
 
 export default {
   name: 'modal-portal',
@@ -36,6 +41,13 @@ export default {
   },
 
   methods: {
+    getModals() {
+      const stack = this.$modal.stack.slice().reverse()
+      const nonOverlayIndex = stack.findIndex(({ overlay }) => !overlay)
+      if (nonOverlayIndex === -1) return stack
+      return stack.slice(0, nonOverlayIndex + 1).reverse()
+    },
+
     update(name: string, props: any, slots: ModalSlots) {
       const children = slots.default || []
 
@@ -89,8 +101,6 @@ export default {
   },
 
   render(h: Function) {
-    const modal = this.modals[this.current]
-
     const events = {
       // Only react the first transition event.
       'before-enter': () => this.$emit('before-open', this.current),
@@ -102,31 +112,32 @@ export default {
 
       'click-backdrop': () => this.$emit('click-backdrop')
     }
+    const modals = this.getModals()
+      .map(({ name }) => this.modals[name])
+      .filter(v => v)
 
-    if (modal) {
-      return createModalVNode(
-        h,
-        {
-          props: modal.props,
+    // for transition
+    const emptyModal = { children: [] }
+
+    return createModalVNode(
+      h,
+      [...modals, emptyModal].map(({ props, children, backdrop }) => ({
+        data: {
+          props,
           on: events
         },
-        modal.children,
-        modal.backdrop
-      )
-    } else {
-      return createModalVNode(h, { on: events }, [])
-    }
+        children,
+        backdrop
+      }))
+    )
   }
 }
 
-function createModalVNode(
-  h: Function,
-  data: any,
-  children: any[],
-  backdrop: ?any
-) {
+function createModalVNode(h: Function, modals: ModalData[]) {
   return h('div', { staticClass: 'modal-wrapper' }, [
-    h(Backdrop, data, backdrop),
-    h(ModalContent, data, children)
+    ...modals.map(({ data, children, backdrop }) => [
+      h(Backdrop, data, backdrop),
+      h(ModalContent, data, children)
+    ])
   ])
 }
