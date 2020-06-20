@@ -12,7 +12,7 @@ export interface Mediator {
 
 export function generateMediator(Vue: any): Mediator {
   const state = {
-    portal: null
+    portal: null,
   }
 
   return new Vue({
@@ -22,7 +22,7 @@ export function generateMediator(Vue: any): Mediator {
 
     data: {
       stack: [],
-      prevName: null
+      prevName: null,
     },
 
     computed: {
@@ -30,7 +30,7 @@ export function generateMediator(Vue: any): Mediator {
         const stack = this.stack
         const modal = stack[stack.length - 1]
         return modal && modal.name
-      }
+      },
     },
 
     methods: {
@@ -42,7 +42,7 @@ export function generateMediator(Vue: any): Mediator {
 
         const item = {
           name,
-          focusedElement
+          focusedElement,
         }
 
         // Prevent to make reactive
@@ -73,13 +73,13 @@ export function generateMediator(Vue: any): Mediator {
           'You need to put <modal-portal> or set `autoMountPortal: true` plugin option.'
         )
         return state.portal
-      }
+      },
     },
 
     watch: {
       currentName(_, prevName) {
         this.prevName = prevName
-      }
-    }
+      },
+    },
   })
 }

@@ -20,7 +20,7 @@ function install(_Vue: any, options: VueThinModalOptions = {}) {
   const descriptor: any = {
     get() {
       return this.$root.$_vueThinModal
-    }
+    },
   }
 
   Object.defineProperty(Vue.prototype, '$modal', descriptor)
@@ -50,7 +50,7 @@ function install(_Vue: any, options: VueThinModalOptions = {}) {
         if (!this.$parent && !this.$options.vueThinModalMediator) {
           this.$_vueThinModal = generateMediator(Vue)
         }
-      }
+      },
     })
   }
 }
@@ -58,5 +58,5 @@ function install(_Vue: any, options: VueThinModalOptions = {}) {
 export { Modal, ModalPortal, generateMediator }
 
 export default {
-  install
+  install,
 }

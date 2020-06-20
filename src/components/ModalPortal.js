@@ -6,7 +6,7 @@ import {
   addBodyClass,
   removeBodyClass,
   setBodyCss,
-  getScrollBarWidth
+  getScrollBarWidth,
 } from '../dom'
 
 const openClassBody = 'modal-open'
@@ -21,7 +21,7 @@ export default {
 
   data() {
     return {
-      modals: {}
+      modals: {},
     }
   },
 
@@ -32,7 +32,7 @@ export default {
 
     current() {
       return this.$modal.currentName
-    }
+    },
   },
 
   methods: {
@@ -40,7 +40,7 @@ export default {
       const children = slots.default || []
 
       // Inject key into children vnode
-      children.forEach(child => {
+      children.forEach((child) => {
         if (child.key) return
 
         if (!child.data) {
@@ -52,13 +52,13 @@ export default {
       this.$set(this.modals, name, {
         props,
         children,
-        backdrop: slots.backdrop
+        backdrop: slots.backdrop,
       })
     },
 
     unregister(name: string) {
       this.$delete(this.modals, name)
-    }
+    },
   },
 
   beforeCreate() {
@@ -100,7 +100,7 @@ export default {
       'after-enter': () => this.$emit('opened', this.current),
       'after-leave': () => this.$emit('closed', this.prev),
 
-      'click-backdrop': () => this.$emit('click-backdrop')
+      'click-backdrop': () => this.$emit('click-backdrop'),
     }
 
     if (modal) {
@@ -108,7 +108,7 @@ export default {
         h,
         {
           props: modal.props,
-          on: events
+          on: events,
         },
         modal.children,
         modal.backdrop
@@ -116,7 +116,7 @@ export default {
     } else {
       return createModalVNode(h, { on: events }, [])
     }
-  }
+  },
 }
 
 function createModalVNode(
@@ -127,6 +127,6 @@ function createModalVNode(
 ) {
   return h('div', { staticClass: 'modal-wrapper' }, [
     h(Backdrop, data, backdrop),
-    h(ModalContent, data, children)
+    h(ModalContent, data, children),
   ])
 }
