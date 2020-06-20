@@ -9,7 +9,7 @@ export default {
   props: {
     show: Boolean,
     disableBackdrop: Boolean,
-    contentTransition: Object
+    contentTransition: Object,
   },
 
   render(h: Function, { props, data, slots }: any) {
@@ -23,7 +23,7 @@ export default {
 
     const transitionData = {
       props: contentTransition,
-      on: listeners
+      on: listeners,
     }
 
     return h(
@@ -32,7 +32,7 @@ export default {
         staticClass: 'modal-content-wrapper',
         attrs: {
           role: 'dialog',
-          'aria-hidden': String(!show)
+          'aria-hidden': String(!show),
         },
         on: {
           click: (event: Event) => {
@@ -42,16 +42,16 @@ export default {
             if (listeners['click-backdrop']) {
               listeners['click-backdrop']()
             }
-          }
-        }
+          },
+        },
       },
       [h('transition', transitionData, [show && child])]
     )
-  }
+  },
 }
 
 function ensureOnlyChild(children) {
-  const domChildren = children.filter(c => c.tag)
+  const domChildren = children.filter((c) => c.tag)
   assert(domChildren.length <= 1, 'Modal must have only one child')
   return domChildren[0]
 }

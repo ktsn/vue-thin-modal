@@ -6,7 +6,7 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     disableBackdrop: Boolean,
     preMount: Boolean,
@@ -14,14 +14,14 @@ export default {
       type: [String, Object],
       default() {
         return { name: 'modal-backdrop' }
-      }
+      },
     },
     contentTransition: {
       type: [String, Object],
       default() {
         return { name: 'modal-content' }
-      }
-    }
+      },
+    },
   },
 
   computed: {
@@ -48,7 +48,7 @@ export default {
     eventListners() {
       const events = ['before-open', 'opened', 'before-close', 'closed']
       const listeners = {}
-      events.forEach(event => {
+      events.forEach((event) => {
         listeners[event] = (name: string) => {
           if (this.name === name) {
             this.$emit(event, name)
@@ -56,12 +56,12 @@ export default {
         }
       })
       return listeners
-    }
+    },
   },
 
   mounted() {
     const portal = this.$modal._getPortal()
-    Object.keys(this.eventListners).forEach(event => {
+    Object.keys(this.eventListners).forEach((event) => {
       portal.$on(event, this.eventListners[event])
     })
 
@@ -77,7 +77,7 @@ export default {
     const portal = this.$modal._getPortal()
 
     portal.unregister(this.name)
-    Object.keys(this.eventListners).forEach(event => {
+    Object.keys(this.eventListners).forEach((event) => {
       portal.$off(event, this.eventListners[event])
     })
   },
@@ -91,9 +91,9 @@ export default {
         show: true,
         backdropTransition: this.computedBackdropTransition,
         contentTransition: this.computedContentTransition,
-        disableBackdrop: this.disableBackdrop
+        disableBackdrop: this.disableBackdrop,
       },
-      this.$slots
+      this.$slots,
     ]
 
     return this.preMount && this.current !== this.name
@@ -101,11 +101,11 @@ export default {
           'div',
           {
             style: {
-              display: 'none'
-            }
+              display: 'none',
+            },
           },
           this.$slots.default
         )
       : h()
-  }
+  },
 }

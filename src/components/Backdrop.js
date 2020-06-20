@@ -6,18 +6,18 @@ export default {
 
   props: {
     show: Boolean,
-    backdropTransition: Object
+    backdropTransition: Object,
   },
 
   render(h: Function, { props, slots }: any) {
     const { show, backdropTransition } = props
 
     const transitionData = {
-      props: backdropTransition
+      props: backdropTransition,
     }
 
     return h('transition', transitionData, [
-      show && (slots().default || h('div', { staticClass: 'modal-backdrop' }))
+      show && (slots().default || h('div', { staticClass: 'modal-backdrop' })),
     ])
-  }
+  },
 }

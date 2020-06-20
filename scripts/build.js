@@ -18,7 +18,7 @@ const banner = `/*!
 const name = 'VueThinModal'
 
 const globals = {
-  vue: 'Vue'
+  vue: 'Vue',
 }
 
 const config = {
@@ -28,10 +28,10 @@ const config = {
       exclude: 'node_modules/**',
       babelrc: false,
       presets: [['@babel/env', { modules: false }], '@babel/flow'],
-      plugins: ['@babel/proposal-class-properties']
-    })
+      plugins: ['@babel/proposal-class-properties'],
+    }),
   ],
-  external: ['vue']
+  external: ['vue'],
 }
 
 mkdirIfNotExists('dist')
@@ -41,41 +41,41 @@ fs.writeFileSync(`dist/${meta.name}.css`, fs.readFileSync('src/style.css'))
 
 // Scripts
 rollup(config)
-  .then(bundle => {
+  .then((bundle) => {
     return write(bundle, `dist/${meta.name}.cjs.js`, {
       format: 'cjs',
-      banner
+      banner,
     })
   })
   .then(() => rollup(config))
-  .then(bundle => {
+  .then((bundle) => {
     return write(bundle, `dist/${meta.name}.esm.js`, {
       format: 'es',
-      banner
+      banner,
     })
   })
   .then(() =>
     rollup(
       addPlugins(config, [
         replace({
-          'process.env.NODE_ENV': JSON.stringify('development')
-        })
+          'process.env.NODE_ENV': JSON.stringify('development'),
+        }),
       ])
     )
   )
-  .then(bundle =>
+  .then((bundle) =>
     write(bundle, `dist/${meta.name}.js`, {
       format: 'umd',
       banner,
       name,
-      globals
+      globals,
     })
   )
   .then(() =>
     rollup(
       addPlugins(config, [
         replace({
-          'process.env.NODE_ENV': JSON.stringify('production')
+          'process.env.NODE_ENV': JSON.stringify('production'),
         }),
         uglify({
           output: {
@@ -85,28 +85,28 @@ rollup(config)
               if (type === 'comment2') {
                 return /^!/i.test(text)
               }
-            }
-          }
-        })
+            },
+          },
+        }),
       ])
     )
   )
-  .then(bundle =>
+  .then((bundle) =>
     write(bundle, `dist/${meta.name}.min.js`, {
       format: 'umd',
       banner,
       name,
-      globals
+      globals,
     })
   )
-  .catch(error => {
+  .catch((error) => {
     console.error(error)
     process.exit(1)
   })
 
 function addPlugins(config, plugins) {
   return Object.assign({}, config, {
-    plugins: config.plugins.concat(plugins)
+    plugins: config.plugins.concat(plugins),
   })
 }
 
@@ -124,7 +124,7 @@ function write(bundle, dest, config) {
     .then(({ output }) => {
       const code = output[0].code
       return new Promise((resolve, reject) => {
-        fs.writeFile(dest, code, error => {
+        fs.writeFile(dest, code, (error) => {
           if (error) return reject(error)
           console.log(green(dest) + ' ' + size(code))
           resolve()
