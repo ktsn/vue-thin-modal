@@ -4,7 +4,7 @@
 
 <script>
 import Scroll from './Scroll.vue'
-import semantic from '!style-loader/useable!css-loader!./assets/semantic.site.css'
+import semantic from '!style-loader?injectType=lazyStyleTag!css-loader!./assets/semantic.site.css'
 
 export default {
   components: {
