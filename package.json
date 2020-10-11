@@ -64,7 +64,7 @@
     "rollup-plugin-replace": "^2.2.0",
     "rollup-plugin-uglify": "^6.0.4",
     "rollup-watch": "^4.3.1",
-    "style-loader": "^1.2.1",
+    "style-loader": "^2.0.0",
     "vue": "^2.6.11",
     "vue-server-renderer": "^2.6.11",
     "vue-template-compiler": "^2.6.11"
