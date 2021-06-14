@@ -36,7 +36,7 @@ export default {
   },
 
   methods: {
-    update(name: string, props: any, slots: ModalSlots) {
+    update(name: string, props: any, slots: ModalSlots, attrs: any) {
       const children = slots.default || []
 
       // Inject key into children vnode
@@ -50,6 +50,7 @@ export default {
       })
 
       this.$set(this.modals, name, {
+        attrs,
         props,
         children,
         backdrop: slots.backdrop,
@@ -107,6 +108,7 @@ export default {
       return createModalVNode(
         h,
         {
+          attrs: modal.attrs,
           props: modal.props,
           on: events,
         },
