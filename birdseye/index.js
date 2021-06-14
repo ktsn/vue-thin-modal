@@ -12,6 +12,7 @@ import Scroll from './Scroll.vue'
 import ScrollSemanticUi from './ScrollSemanticUi.vue'
 import PreMount from './PreMount.vue'
 import Events from './Events.vue'
+import Accessible from './Accessible.vue'
 
 Vue.use(VueModal)
 
@@ -23,6 +24,7 @@ const catalogs = [
   catalogFor(ScrollSemanticUi, 'ScrollSemanticUi').add('preview'),
   catalogFor(PreMount, 'PreMount').add('preview'),
   catalogFor(Events, 'Events').add('preview'),
+  catalogFor(Accessible, 'Accessible').add('preview')
 ]
 
 birdseye('#app', catalogs)
