@@ -34,7 +34,7 @@ export default {
         attrs: {
           role: 'dialog',
           'aria-hidden': String(!show),
-          ...attrs
+          ...attrs,
         },
         on: {
           click: (event: Event) => {
