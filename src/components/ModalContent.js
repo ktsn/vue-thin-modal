@@ -14,6 +14,7 @@ export default {
 
   render(h: Function, { props, data, slots }: any) {
     const listeners = data.on || {}
+    const attrs = data.attrs || {}
     const { show, disableBackdrop, contentTransition } = props
     const child = ensureOnlyChild(slots().default || [])
 
@@ -33,6 +34,7 @@ export default {
         attrs: {
           role: 'dialog',
           'aria-hidden': String(!show),
+          ...attrs
         },
         on: {
           click: (event: Event) => {

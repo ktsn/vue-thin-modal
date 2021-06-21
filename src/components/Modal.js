@@ -94,6 +94,7 @@ export default {
         disableBackdrop: this.disableBackdrop,
       },
       this.$slots,
+      this.$attrs
     ]
 
     return this.preMount && this.current !== this.name
