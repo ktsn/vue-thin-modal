@@ -1,0 +1,24 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    day: saturday
+    timezone: Asia/Singapore
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: flow-bin
+    versions:
+    - 0.143.1
+    - 0.144.0
+    - 0.145.0
+    - 0.146.0
+    - 0.147.0
+    - 0.148.0
+  - dependency-name: "@birdseye/vue"
+    versions:
+    - 0.9.0
+  - dependency-name: "@birdseye/app"
+    versions:
+    - 0.9.0
