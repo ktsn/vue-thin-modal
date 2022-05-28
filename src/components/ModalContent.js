@@ -38,7 +38,6 @@ export default {
         },
         on: {
           click: (event: Event) => {
-            if (disableBackdrop) return
             if (event.target !== event.currentTarget) return
 
             if (listeners['click-backdrop']) {
