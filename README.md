@@ -167,6 +167,10 @@ new Vue({
 
   Emitted after closing a modal.
 
+* `click-backdrop`
+
+  Emitted when clicking backdrop.
+
 #### Slots
 
 * `(default)` - A modal content. Must be only element.

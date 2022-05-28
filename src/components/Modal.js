@@ -46,7 +46,13 @@ export default {
     },
 
     eventListners() {
-      const events = ['before-open', 'opened', 'before-close', 'closed']
+      const events = [
+        'before-open',
+        'opened',
+        'before-close',
+        'closed',
+        'click-backdrop',
+      ]
       const listeners = {}
       events.forEach((event) => {
         listeners[event] = (name: string) => {

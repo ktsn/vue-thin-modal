@@ -68,7 +68,10 @@ export default {
 
   beforeMount() {
     this.$on('click-backdrop', () => {
-      this.$modal.pop()
+      const modal = this.modals[this.current]
+      if (!modal.props.disableBackdrop) {
+        this.$modal.pop()
+      }
     })
 
     this.$on('before-open', () => {
@@ -101,7 +104,7 @@ export default {
       'after-enter': () => this.$emit('opened', this.current),
       'after-leave': () => this.$emit('closed', this.prev),
 
-      'click-backdrop': () => this.$emit('click-backdrop'),
+      'click-backdrop': () => this.$emit('click-backdrop', this.current),
     }
 
     if (modal) {
